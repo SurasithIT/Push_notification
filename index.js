@@ -18,17 +18,22 @@ webpush.setVapidDetails(
   publicVapidKey,
   privateVapidKey
 );
-
+// Subscribe Route
 app.post("/subscribe", (req, res) => {
+  // Get pushSubscription object
   const subscribtion = req.body;
+  console.log(subscribtion);
 
+  // Send 201 - resource created
   res.status(201).json({});
 
+  // Create payload
   const payload = JSON.stringify({ title: "Push Test" });
 
+  // Pass object into sendNotification
   webpush
     .sendNotification(subscribtion, payload)
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 const port = 4000;
