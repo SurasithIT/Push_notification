@@ -14,7 +14,7 @@ async function send() {
     scope: "/",
   });
   console.log("Service worker registerd...");
-
+  console.log(register);
   // Regiter Push
   console.log("Registering Push...");
   const subsciption = await register.pushManager.subscribe({
@@ -22,6 +22,7 @@ async function send() {
     applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
   });
   console.log("Push registered...");
+  console.log(subsciption);
 
   // Send Push Notification
   console.log("Sending Push...");
@@ -33,6 +34,12 @@ async function send() {
     },
   });
   console.log("Push sent...");
+
+  var rec_Id = "S1234"; // Dummy global id variable
+  var time = new Date();
+  // register.active.postMessage(JSON.stringify({ rec_Id: rec_Id, time: time }));
+  register.active.postMessage(JSON.stringify({ rec_Id: "S1234", time: 15000 }));
+  // register.active.postMessage(JSON.stringify({ rec_Id: "S1235", time: 10000 }));
 }
 
 function urlBase64ToUint8Array(base64String) {
